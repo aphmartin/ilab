@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!--Favicon-->
+  <link rel="icon" type="image/x-icon" href="dist/img/ilab.png">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
