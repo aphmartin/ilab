@@ -1,67 +1,40 @@
 <?php
-	session_start();
-	include 'conexionBD.php';
+session_start();
+include 'conexionBD.php';
 
-	$email="";
-	$pass="";
-	$nameErr="";
-	if ($_SERVER["REQUEST_METHOD"] == "POST") 
-	{
-  		if (empty($_POST["email"])) 
-  		{
-		    	$nameErr = "El correo es requirido";
-		} 
-		else 
-		{
-		    	$email = $_POST["email"];
-		    
-		}
-		if (empty($_POST["pwd"])) 
-  		{
-		    	$nameErr = "La contraseña es requirido";
-		} 
-		else 
-		{
-		    	$pass = $_POST["pwd"];
-		    
-		}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = isset($_POST["email"]) ? $_POST["email"] : "";
+    $pass = isset($_POST["pwd"]) ? $_POST["pwd"] : "";
 
-		//echo "Si llegan los datos";
-		///echo "<br>".$email;
-		//echo "<br>".$pass;
-		if(strlen($email)<1)
-		{
-			echo "el email esta en blannco";
-		}
-		else
-		{
-
-			$sql = "SELECT idk, username FROM usuarios where correo='$email' and password='$pass'";
-			//echo $sql;
-			$result = $conn->query($sql);
-
-			if ($result->num_rows > 0) {
-				echo "ha sido conectado";
-				// Set session variables
-				$_SESSION["autenticado"] = 1;
-				while($row = $result->fetch_assoc()) {
-						$nombre=$row['username'];
-    					$id=$row['id'];
-  					}
-				$_SESSION["username"]=$nombre;
-				$_SESSION['id']=$id;
-			    header("Location: principal.php");
-			} else {
-				$_SESSION["autenticado"] = 0;
-			  echo "Error en usuario o contraseña";
-			}
-			$conn->close();
-		}
+	if (empty($email) || empty($pass)) {
+		$_SESSION["error"] = "El correo y la contraseña son requeridos";
+		$_SESSION["email"] = $email; // Save the email even if there are errors
+		$_SESSION["pwd"] = $pass; // Optionally save the password
+		header("Location: login.php");
+		exit();
+	} else {
+		$_SESSION["email"] = $email; // Save the email
 	}
-	else
-	{
-		echo "No hay datos";
-		echo "<a href='login.php'> regresar </a>";
-	}
+	
+    $stmt = $conn->prepare("SELECT idK, userName FROM usuarios WHERE correo=? AND password=?");
+    $stmt->bind_param("ss", $email, $pass);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $_SESSION["autenticado"] = 1;
+        $_SESSION["username"] = $row['userName'];
+        $_SESSION['id'] = $row['idK'];
+        header("Location: principal.php");
+    } else {
+        $_SESSION["error"] = "Error en usuario o contraseña";
+        header("Location: login.php");
+    }
+    $stmt->close();
+    $conn->close();
+} else {
+    echo "No se recibieron datos";
+    echo "<a href='login.php'> regresar </a>";
+}
 ?>
