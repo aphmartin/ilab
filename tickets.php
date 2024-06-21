@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!--Favicon-->
+  <link rel="icon" type="image/x-icon" href="dist/img/ilab.png">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
