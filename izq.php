@@ -68,7 +68,7 @@
             <a href="catusuarios.php" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
-                    Usuarios
+                    Usuario
                 </p>
             </a>
         </li>
