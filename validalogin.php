@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["autenticado"] = 1;
         $_SESSION["username"] = $row['userName'];
         $_SESSION['id'] = $row['idK'];
-        header("Location: principal.php");
+        header("Location: index.php");
     } else {
         $_SESSION["error"] = "Error en usuario o contraseña";
         header("Location: login.php");
