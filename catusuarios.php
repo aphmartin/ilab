@@ -36,119 +36,11 @@
 
   <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="principal.php" class="brand-link">
-      <img src="dist/img/logo.jpg" alt="Taller Web" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">iLab</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="Usuario">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION["username"]; ?></a>
-        </div>
-      </div>
-
-    
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-           <li class="nav-header">Operaciones</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Catalogos
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="cataulas.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Aulas
-                  </p>
-                </a>
-          </li>
-              <li class="nav-item">
-                <a href="catcomputadoras.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Computadoras</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="catinventario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inventarios</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class = "nav-header">------------------------------------------------</li>
-          
-         <li class = "nav-header">Reportes</li>
-         <li class="nav-item">
-            <a href="reportes.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Reportes
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="tickets.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Tickets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-
-          <li class = "nav-header">------------------------------------------------</li>
-          
-          <li class="nav-header">Configuración</li>
-           <li class="nav-item">
-            <a href="catusuarios.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Usuarios
-                             </p>
-            </a>
-          </li>
-          
-           <li class = "nav-header">------------------------------------------------</li>
-           
-           <li class="nav-item">
-            <a href="cerrar.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Cerrar
-                             </p>
-            </a>
-          </li>
-
-        </ul>
-      </nav>
-
-
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
+  <!-- Barra de navegación izquierda -->
+  <?php  
+      include('izq.php')
+   ?>
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -156,7 +48,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catalogo de usuarios</h1>
+            <h1>Catalogo de Tickets</h1>
           </div>
           <div class="col-sm-6">
             
@@ -170,7 +62,104 @@
 
 <div class="card">
 <div class="card-header">
-<h3 class="card-title">Lista de usuarios</h3>
+<h3 class="card-title">Lista de Tickets</h3>
+<div class="card-tools">
+<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+<i class="fas fa-minus"></i>
+</button>
+<!-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+<i class="fas fa-times"></i>
+</button> -->
+</div>
+</div>
+<div class="card-body p-0">
+<table class="table table-striped projects">
+    <thead>
+        <tr>
+        <th style="width: 1%">
+        ID
+        </th>
+        <th style="width: 30%">
+        Ticket
+        </th>
+        
+        
+        <th style="width: 18%">
+        Status
+        </th>
+        <th style="width: 20%">
+        </th>
+        </tr>
+    </thead>
+<tbody>
+      <?php
+        $sql = "SELECT idk, nombre, isActivo FROM ticket";
+      //echo $sql;
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+    
+        while($row = $result->fetch_assoc()) {
+              $idk=$row['idk'];
+              $nombre=$row['nombre'];
+              $activo=$row['isActivo'];
+              ?>  
+              <tr>
+          <td>
+            <?php echo $idk;?>
+          </td>
+          <td>
+              <?php echo $nombre;?>
+          </td>
+          <td>
+          <?php if($activo == 1){
+            echo "<span class='badge badge-success'>Activo</span>";
+          }else{
+            echo "<span class='badge badge-danger'>Inactivo</span>";
+          } ?>
+            
+          </td>
+         
+        
+                <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" href="#">
+                <i class="fas fa-folder">
+                </i>
+                View
+                </a>
+                <a class="btn btn-info btn-sm" href="#">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Edit
+                </a>
+                <a class="btn btn-danger btn-sm" href="#">
+                <i class="fas fa-trash">
+                </i>
+                Delete
+                </a>
+          </td>
+      </tr>
+
+              <?php
+            }
+       
+      } else {
+       
+        echo "No hay datos para mostrar";
+      }
+      //$conn->close();
+      ?>
+      
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="card">
+<div class="card-header">
+<h3 class="card-title">Lista de Tickets</h3>
 <div class="card-tools">
 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 <i class="fas fa-minus"></i>
@@ -184,17 +173,27 @@
 <table class="table table-striped projects">
     <thead>
         <tr>
-        <th style="width: 1%">
+        <th style="width: 2%">
         ID
         </th>
-        <th style="width: 20%">
-        Nombre de Usuario
+        <th style="width: 2%">
+        ID Computadora
         </th>
-        <th style="width: 30%">
-        Email
+        <th style="width: 2%">
+        ID Aula
+        </th>
+        <th style="width: 2%">
+        ID Usuario
+        </th>
+        <th style="width: 50%">
+        Descripcion
+        </th>
+        <th style="width: 10%">
+        Fecha
         </th>
         
-        <th style="width: 8%" class="text-center">
+        
+        <th style="width: 18%">
         Status
         </th>
         <th style="width: 20%">
@@ -203,7 +202,7 @@
     </thead>
 <tbody>
       <?php
-        $sql = "SELECT idk, nombre, correo FROM usuarios ";
+        $sql = "SELECT idk, nombre, isActivo FROM ticket ";
       //echo $sql;
       $result = $conn->query($sql);
 
@@ -211,24 +210,38 @@
     
         while($row = $result->fetch_assoc()) {
               $idk=$row['idk'];
-              $nombre=$row['nombre'];
-              $email=$row['correo'];
-
+              $idComp=$row['id_computadora'];
+              $idAula=$row['id_aula'];
+              $idUsuario=$row['id_usuario'];
+              $descripcion=$row['descripcion'];
+              $activo=$row['isActivo'];
               ?>  
               <tr>
           <td>
             <?php echo $idk;?>
           </td>
           <td>
-              <?php echo $nombre;?>
+              <?php echo $idComp;?>
           </td>
           <td>
-              <?php echo $email;?>
+              <?php echo $idAula;?>
+          </td>
+          <td>
+              <?php echo $idUsuario;?>
+          </td>
+          <td>
+              <?php echo $descripcion;?>
+          </td>
+          <td>
+          <?php if($activo == 1){
+            echo "<span class='badge badge-success'>Activo</span>";
+          }else{
+            echo "<span class='badge badge-danger'>Inactivo</span>";
+          } ?>
+            
           </td>
          
-          <td class="project-state">
-                <span class="badge badge-success">Success</span>
-                </td>
+        
                 <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" href="#">
                 <i class="fas fa-folder">

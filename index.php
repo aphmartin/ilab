@@ -36,15 +36,11 @@
    <?php  
       include('izq.php')
    ?>
-  
-
-  <!-- Main Sidebar Container -->
-
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Encabezado - titulo -->
-    <?php 
+    <?php
       include('header.php')
     ?>
 
