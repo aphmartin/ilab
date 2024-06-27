@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2024 a las 19:27:36
+-- Tiempo de generación: 28-06-2024 a las 01:27:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `aulas`
 --
-
 
 CREATE TABLE `aulas` (
   `idK` bigint(10) NOT NULL,
@@ -139,23 +138,23 @@ CREATE TABLE `ticketdetalle` (
 --
 
 CREATE TABLE `usuarios` (
-  `idK` bigint(20) NOT NULL,
-  `userName` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL,
+  `idK` int(10) NOT NULL,
+  `userName` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `correo` varchar(100) NOT NULL,
-  `idPerfil` int(11) NOT NULL,
-  `isActivo` int(11) NOT NULL
+  `sexo` varchar(1) NOT NULL,
+  `isActivo` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idK`, `userName`, `password`, `nombre`, `apellidos`, `correo`, `idPerfil`, `isActivo`) VALUES
-(1, 'webadmin', 'sis123', 'administrador', 'de sistema', 'martin.anduaga@ues.mx', 1, 1),
-(3, 'Laker', 'sis123', 'administrador', 'de sistema', 'joseluiscamachohernandez4@gmail.com', 1, 1);
+INSERT INTO `usuarios` (`idK`, `userName`, `password`, `correo`, `nombre`, `apellidos`, `sexo`, `isActivo`) VALUES
+(1, 'webadmin', 'sis123', 'franciscoflores.plc@gmail.com', 'Abelardo', 'Flores', 'H', b'1'),
+(2, 'webadmin', 'sis123', 'martin.anduaga@ues.mx', 'Martin', 'Anduaga', '', b'1');
 
 --
 -- Índices para tablas volcadas
@@ -259,7 +258,7 @@ ALTER TABLE `ticketdetalle`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idK` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idK` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

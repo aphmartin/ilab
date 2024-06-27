@@ -51,7 +51,7 @@
             <h1>Catalogo de Tickets</h1>
           </div>
           <div class="col-sm-6">
-            
+            <a href="regusuarios.php"><button type="button" class="btn btn-primary">Registrar Usuario</button></a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
