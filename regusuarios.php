@@ -156,10 +156,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Catalogo de usuarios</h1>
+            <h1>Registrar Usuarios</h1>
           </div>
           <div class="col-sm-6">
-            <a href="regusuarios.php"><button type="button" class="btn btn-primary">Registrar Usuario</button></a>
+            <!--placeholder-->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -167,105 +167,73 @@
 
     <!-- Main content -->
     <section class="content">
+    <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Ingresar datos del usuario a registrar</p>
 
-<div class="card">
-<div class="card-header">
-<h3 class="card-title">Lista de usuarios</h3>
-<div class="card-tools">
-<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-<i class="fas fa-minus"></i>
-</button>
-<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-<i class="fas fa-times"></i>
-</button>
-</div>
-</div>
-<div class="card-body p-0">
-<table class="table table-striped projects">
-    <thead>
-        <tr>
-        <th style="width: 1%">
-        ID
-        </th>
-        <th style="width: 20%">
-        Nombre de Usuario
-        </th>
-        <th style="width: 30%">
-        Email
-        </th>
+      <form action="validaRegUser.php" method="post"> <!--TODO: cambiar por RegUser-->
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Username" name="userName">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Nombre" name="nombre">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Apellido" name="apellido">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Correo Electronico" name="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Contraseña" name="pswd">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+        <label for="lang">Sexo:</label>
+            <select name="sexo" id="selectSex">
+              <option value="H">Hombre</option>
+              <option value="M">Mujer</option>
+              <option value="N">No Binario</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="checkbox" name="isActivo">Es Activo
+        </div>
+      </div>
+        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
         
-        <th style="width: 8%" class="text-center">
-        Status
-        </th>
-        <th style="width: 20%">
-        </th>
-        </tr>
-    </thead>
-<tbody>
-      <?php
-        $sql = "SELECT idk, nombre, correo FROM usuarios ";
-      //echo $sql;
-      $result = $conn->query($sql);
-
-      if ($result->num_rows > 0) {
-    
-        while($row = $result->fetch_assoc()) {
-              $idk=$row['idk'];
-              $nombre=$row['nombre'];
-              $email=$row['correo'];
-
-              ?>  
-              <tr>
-          <td>
-            <?php echo $idk;?>
-          </td>
-          <td>
-              <?php echo $nombre;?>
-          </td>
-          <td>
-              <?php echo $email;?>
-          </td>
-         
-          <td class="project-state">
-                <span class="badge badge-success">Success</span>
-                </td>
-                <td class="project-actions text-right">
-                <a class="btn btn-primary btn-sm" href="#">
-                <i class="fas fa-folder">
-                </i>
-                View
-                </a>
-                <a class="btn btn-info btn-sm" href="#">
-                <i class="fas fa-pencil-alt">
-                </i>
-                Edit
-                </a>
-                <a class="btn btn-danger btn-sm" href="#">
-                <i class="fas fa-trash">
-                </i>
-                Delete
-                </a>
-          </td>
-      </tr>
-
-              <?php
-            }
-       
-      } else {
-       
-        echo "No hay datos para mostrar";
-      }
-      $conn->close();
-      ?>
-      
-
-</tbody>
-</table>
-</div>
-
-</div>
-
-</section>
+      </form>
+      <a href="catcomputadoras.php"><button style="margin-top: 10px" class="btn btn-primary btn-block">Cancelar</button></a>
 
     <!-- /.content -->
   </div>
